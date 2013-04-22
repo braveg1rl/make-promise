@@ -1,6 +1,6 @@
 {
   "name": "make-promise",
-  "description": "A single function which creates a Promises/A+ promise.",
+  "description": "A function that creates a Promises/A+ promise.",
   "keywords": [],
   "version": "0.0.0",
   "author": "Meryn Stol <merynstol@gmail.com>",
