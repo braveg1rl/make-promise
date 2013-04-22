@@ -7,7 +7,7 @@ watch:
 	node_modules/.bin/coffee --watch --compile --output lib/ src/
 	
 test:
-	node_modules/.bin/mocha
+	node_modules/.bin/promises-aplus-tests lib/adapter.js
 
 jumpstart:
 	curl -u 'meryn' https://api.github.com/user/repos -d '{"name":"make-promise", "description":"A single function which creates a Promises/A+ promise.","private":false}'
