@@ -19,14 +19,21 @@ This module effectively serves as a convenient interface which I can write to, a
 ```javascript
 var skyIsFalling
 makePromise = require("make-promise")
-makePromise(function(resolve,reject) {
-  setImmediate function() {
+promise = makePromise(function(resolve, reject) {
+  setImmediate(function() {
     if skyIsfalling
       reject(new Error("Sky is falling."))
     else
       resolve()
-  }
+  })
 })
+promise.then(
+  function(){ 
+    // phew! 
+  }, 
+  function(err) { 
+    console.error err.toString() + " Better take cover."
+  })
 ```
 
 ## Credits
