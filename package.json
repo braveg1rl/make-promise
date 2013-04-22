@@ -1,0 +1,33 @@
+{
+  "name": "make-promise",
+  "description": "A single function which creates a Promises/A+ promise.",
+  "keywords": [],
+  "version": "0.0.0",
+  "author": "Meryn Stol <merynstol@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/meryn/make-promise",
+  "bugs": "https://github.com/meryn/make-promise/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/meryn/make-promise.git"
+  },
+  "private": false,
+  "dependencies": {
+    "rsvp": "~1.2.0"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.6.2",
+    "mocha": "~1.9.0"
+  },
+  "optionalDependencies": {},
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "main": "lib/make-promise.js",
+  "scripts": {
+    "prepublish": "npm test",
+    "pretest": "make build",
+    "test": "make test"
+  }
+}
