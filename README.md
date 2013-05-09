@@ -2,29 +2,26 @@
 
 A function which creates a Promises/A+ promise.
 
-This module passes version 1.3.1 of the [Promises/A+ Compliance Test Suite](https://github.com/promises-aplus/promises-tests) but is *not* an implementation of the spec itself. It simply delegates everything to a proper Promises/A+ implementation. Currently, this is [Promiscuous](https://npmjs.org/package/promiscuous) by [Ruben Verborgh](http://ruben.verborgh.org/).
-
-## Rationale
-
-I noticed that I wanted a simple way to create a promise in multiple projects. I already had written a `makePromise` function for [Faithful](https://github.com/meryn/faithful), but I did not want to introduce a dependency on the whole Faithful library. 
-
-This module effectively serves as a convenient interface which I can write to, and which abstracts away the specific implementation method, so I can choose another one when this seems useful.
+This module passes version 1.3.1 of the [Promises/A+ Compliance Test Suite](https://github.com/promises-aplus/promises-tests).
 
 ## Usage
 
-`make-promise` exports a single function, which takes a function as it sole argument. After you have called `makePromise`, the function you have provided is immediately called afterwards with two paramaters; `resolve` and `reject`. Calling `resolve` at some point will cause the promise to be fulfilled, calling `reject` at some point will cause the promise to fail.
+`make-promise` exports a single function, which takes a function as it sole argument. After you have called `makePromise`, this function is called immediately afterwards with a Node-style callback as its sole argument.
+
+* Calling the callback with a truthy error argument will cause the promise to be rejected with the value of the error argument.
+* Calling the callback with a falsy error argument will cause the promise to be fulfilled with the value of the result argument. If there is no result argument, the promise will be fulfilled with `undefined`.
 
 ## Code example
 
 ```javascript
-var skyIsFalling
-makePromise = require("make-promise")
-promise = makePromise(function(resolve, reject) {
+var skyIsFalling = false
+var makePromise = require("make-promise")
+var promise = makePromise(function(cb) {
   setImmediate(function() {
     if skyIsfalling
-      reject(new Error("Sky is falling."))
+      cb(new Error("Sky is falling."))
     else
-      resolve()
+      cb()
   })
 })
 promise.then(
@@ -38,9 +35,7 @@ promise.then(
 
 ## Credits
 
-Absolutely everything is done by [Promiscuous](https://npmjs.org/package/promiscuous), a Promises/A+ implementation created by [Ruben Verborgh](http://ruben.verborgh.org/).
-
-The idea for the specific API is not mine either. It mimics the API of the (upcoming) RSVP 2.0. The only difference is that RSVP uses `new RSVP.Promise` and in mine its just `makePromise`.
+This implementation is based on the code for the ["promise"](https://github.com/then/promise) module by [Forbes Lindsay](http://www.forbeslindesay.co.uk/). See credits.txt.
 
 ## License
 
