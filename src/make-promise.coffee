@@ -1,33 +1,30 @@
 require "setimmediate"
 
 module.exports = makePromise = (fn) ->
-  state = null
-  delegating = false
-  value = null
+  state = undefined
+  finalState = undefined
   deferreds = []
-  handle = (deferred) ->
-    return deferreds.push deferred if state is null
-    return setImmediate ->
-      cb = if state then deferred.onFulfilled else deferred.onRejected
-      if typeof cb isnt "function"
-        return if state then deferred.resolve value else deferred.reject value
-      try deferred.resolve cb value
-      catch error
-        deferred.reject error
-  resolve = (newValue) -> resolve_ newValue unless delegating
-  reject = (newValue) -> reject_ newValue unless delegating
-  resolve_ = (value) ->
-    return if state?
-    return assumeState true, value if not value or typeof value.then isnt "function"
-    delegating = true
-    value.then resolve_, reject_
-  reject_ = (value) -> assumeState false, value unless state?
-  assumeState = (newState, newValue) ->
-    state = newState
-    value = newValue
-    handle deferred while deferred = deferreds.shift()
-  try fn resolve, reject
-  catch error
-    reject error
-  then: (onFulfilled, onRejected) ->
-    makePromise (resolve, reject) -> handle {onFulfilled, onRejected, resolve, reject}
+  
+  resolved = (fn) -> 
+    return fn undefined if state is undefined
+    return fn finalState if finalState?
+    return resolve state, (resolvedState) -> fn finalState = resolvedState
+  handle = (deferred, state) ->
+    if not state? then deferreds.push deferred else setImmediate -> call deferred, state
+  call = (deferred, [kept, value]) ->
+    cb = if kept then deferred.whenKept else deferred.whenBroken
+    if typeof cb is "function"
+      return try deferred.cb null, cb value catch err then deferred.cb err, null, true
+    if kept then deferred.cb null, value else deferred.cb value, null, true
+  resultCB = (err, result, forceError=false) ->
+    return unless state is undefined
+    state = if err or forceError then [false, err] else [true, result]
+    resolved (state) -> call deferred, state while deferred = deferreds.shift() 
+  try fn resultCB catch error then resultCB error, null, true
+  then: (whenKept, whenBroken) -> makePromise (cb) -> 
+    resolved (state) -> handle {whenKept, whenBroken, cb}, state
+
+resolve = ([kept, value], cb) ->
+  return cb [false, value] unless kept
+  return cb [true, value] if not value or typeof value.then isnt "function"
+  return value.then ((value) -> resolve [true, value], cb), (err) -> cb [false, err]
