@@ -11,7 +11,7 @@
     "timoxley/assert": "*"
   },
   "license": "MIT",
-  "main": "js/lib/_.js",
+  "main": "lib/make-promise.js",
   "scripts": [
     "lib/make-promise.js"
   ]
