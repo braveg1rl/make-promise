@@ -21,8 +21,11 @@ module.exports = makePromise = (fn) ->
     state = if err or forceError then [false, err] else [true, result]
     resolved (state) -> call deferred, state while deferred = deferreds.shift() 
   try fn resultCB catch error then resultCB error, null, true
-  then: (whenKept, whenBroken) -> makePromise (cb) -> 
-    resolved (state) -> handle {whenKept, whenBroken, cb}, state
+  then: (whenKept, whenBroken) -> 
+    if whenKept? and typeof whenKept is "object" and (whenKept.onFulfilled or whenKept.onRejected)
+      whenBroken = whenKept.onRejected
+      whenKept = whenKept.onFulfilled
+    makePromise (cb) -> resolved (state) -> handle {whenKept, whenBroken, cb}, state
 
 resolve = ([kept, value], cb) ->
   return cb [false, value] unless kept
