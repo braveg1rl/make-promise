@@ -1,4 +1,4 @@
-# make-promise [![Build Status](https://travis-ci.org/meryn/make-promise.png?branch=master)](https://travis-ci.org/meryn/make-promise) [![Dependency Status](https://david-dm.org/meryn/make-promise.png)](https://david-dm.org/meryn/make-promise)
+# make-promise [![Build Status](https://travis-ci.org/braveg1rl/make-promise.png?branch=master)](https://travis-ci.org/braveg1rl/make-promise) [![Dependency Status](https://david-dm.org/braveg1rl/make-promise.png)](https://david-dm.org/braveg1rl/make-promise)
 
 A function which creates a Promises/A+ promise.
 
@@ -40,4 +40,4 @@ This implementation is based on the code for the ["promise"](https://github.com/
 ## License
 
 make-promise is released under the [MIT License](http://opensource.org/licenses/MIT).  
-Copyright (c) 2013 Meryn Stol  
+Copyright (c) 2013 Braveg1rl  

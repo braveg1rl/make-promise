@@ -3,13 +3,13 @@
   "description": "A function that creates a Promises/A+ promise.",
   "keywords": [],
   "version": "0.1.1",
-  "author": "Meryn Stol <merynstol@gmail.com>",
+  "author": "Braveg1rl <braveg1rl@outlook.com>",
   "license": "MIT",
-  "homepage": "https://github.com/meryn/make-promise",
-  "bugs": "https://github.com/meryn/make-promise/issues",
+  "homepage": "https://github.com/braveg1rl/make-promise",
+  "bugs": "https://github.com/braveg1rl/make-promise/issues",
   "repository": {
     "type": "git",
-    "url": "git://github.com/meryn/make-promise.git"
+    "url": "git://github.com/braveg1rl/make-promise.git"
   },
   "private": false,
   "dependencies": {
