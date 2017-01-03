@@ -1,14 +1,12 @@
 {
   "name": "make-promise",
-  "repo": "meryn/make-promise",
-  "description": "Creates a Promises/A+ promise.",
+  "repo": "braveg1rl/make-promise",
+  "description": "A function that creates a Bluebird promise that can be controlled through a Node-style callback.",
   "version": "0.1.0",
   "keywords": [],
   "dependencies": {
-    "meryn/setimmediate": "*"
   },
   "development": {
-    "timoxley/assert": "*"
   },
   "license": "MIT",
   "main": "lib/make-promise.js",
