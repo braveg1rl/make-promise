@@ -1,8 +1,6 @@
 # make-promise [![Build Status](https://travis-ci.org/braveg1rl/make-promise.png?branch=master)](https://travis-ci.org/braveg1rl/make-promise) [![Dependency Status](https://david-dm.org/braveg1rl/make-promise.png)](https://david-dm.org/braveg1rl/make-promise)
 
-A function which creates a Promises/A+ promise.
-
-This module passes version 1.3.1 of the [Promises/A+ Compliance Test Suite](https://github.com/promises-aplus/promises-tests).
+A function that creates a Bluebird promise that can be resolved or rejected using a Node-style callback.
 
 ## Usage
 
@@ -25,19 +23,15 @@ var promise = makePromise(function(cb) {
   })
 })
 promise.then(
-  function(){ 
-    // phew! 
-  }, 
-  function(err) { 
+  function(){
+    // phew!
+  },
+  function(err) {
     console.error err.toString() + " Better take cover."
   })
 ```
 
-## Credits
-
-This implementation is based on the code for the ["promise"](https://github.com/then/promise) module by [Forbes Lindsay](http://www.forbeslindesay.co.uk/). See credits.txt.
-
 ## License
 
 make-promise is released under the [MIT License](http://opensource.org/licenses/MIT).  
-Copyright (c) 2013 Braveg1rl  
+Copyright (c) 2017 Braveg1rl  
