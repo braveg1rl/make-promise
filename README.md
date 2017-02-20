@@ -1,5 +1,7 @@
 # make-promise [![Build Status](https://travis-ci.org/braveg1rl/make-promise.png?branch=master)](https://travis-ci.org/braveg1rl/make-promise) [![Dependency Status](https://david-dm.org/braveg1rl/make-promise.png)](https://david-dm.org/braveg1rl/make-promise)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/braveg1rl/make-promise.svg)](https://greenkeeper.io/)
+
 A function that creates a Bluebird promise that can be resolved or rejected using a Node-style callback.
 
 ## Usage
